@@ -47,7 +47,9 @@ public class PermissionsUtil {
 
         if (PermissionsUtil.hasPermission(context,permission)){
             permissionListener.permissionGranted(permission);
+            Log.i(TAG, "===requestPermission: " +"全部授权。。。");
         }else {
+            Log.i(TAG, "===requestPermission: " +"没有全部授权。。。");
             if (Build.VERSION.SDK_INT < 23){
                 permissionListener.permissionDenied(permission);
             }else {
@@ -77,6 +79,7 @@ public class PermissionsUtil {
 
         for (String strPermission: permissions) {
             int result = PermissionChecker.checkSelfPermission(context,strPermission);
+            Log.i(TAG, "===hasPermission: " + result);
             if (result != PermissionChecker.PERMISSION_GRANTED){
                 return false;
             }

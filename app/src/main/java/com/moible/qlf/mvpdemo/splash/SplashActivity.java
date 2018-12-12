@@ -1,17 +1,36 @@
 package com.moible.qlf.mvpdemo.splash;
 
+import android.Manifest;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.View;
 
+import com.moible.bksx.xcb.granor.PermissionListener;
+import com.moible.bksx.xcb.granor.PermissionsUtil;
 import com.moible.qlf.baseframework.base.BaseActivity;
+import com.moible.qlf.mvpdemo.MainActivity;
 import com.moible.qlf.mvpdemo.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author qlf
  */
 public class SplashActivity extends BaseActivity {
 
+    @BindView(R.id.imageView)
+    ConstraintLayout imageView;
+    private String[] strPermissions = new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.CAMERA //相机
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +54,30 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void initEvent() {
+        PermissionsUtil.requestPermission(mContext, new PermissionListener() {
+            @Override
+            public void permissionGranted(@NonNull String... permission) {
+                Log.i(TAG, "===permissionGranted: ");
+                Intent intent = new Intent(mContext,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void permissionDenied(String... permission) {
+                Log.i(TAG, "===permissionGranted: ");
+            }
+        },strPermissions,true,null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 

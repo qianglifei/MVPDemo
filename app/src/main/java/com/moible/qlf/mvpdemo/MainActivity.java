@@ -20,13 +20,18 @@ public class MainActivity extends BaseActivity {
     private Context mContext = this;
 
     @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
     protected void getBundleExtras(Bundle extras) {
 
     }
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.activity_main;
     }
 
     @Override

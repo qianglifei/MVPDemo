@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -50,7 +51,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  * 3.泛型类型参数可以申明在方法返回值之前作用域为该方法，
  * 也可以申明在类后面这样作用域为整个类(如果只申明在方法的话，有可能放进去的是猪，取出来的是狗)。
  */
-public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends SupportActivity implements View.OnClickListener {
+public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity implements View.OnClickListener {
     public String TAG, urlStr, device_token;
     public Context mContext;
     public ASimpleCacheUtils aSimpleCacheUtils;
@@ -104,7 +105,10 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         if (null != extras) {
             getBundleExtras(extras);
         }
+        initEvent();
     }
+
+    protected abstract void initEvent();
 
     protected abstract void getBundleExtras(Bundle extras);
 
