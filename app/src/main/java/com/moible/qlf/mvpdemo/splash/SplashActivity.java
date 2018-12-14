@@ -12,7 +12,7 @@ import android.view.View;
 import com.moible.bksx.xcb.granor.PermissionListener;
 import com.moible.bksx.xcb.granor.PermissionsUtil;
 import com.moible.qlf.baseframework.base.BaseActivity;
-import com.moible.qlf.mvpdemo.MainActivity;
+import com.moible.qlf.mvpdemo.main.MainActivity;
 import com.moible.qlf.mvpdemo.R;
 
 import butterknife.BindView;

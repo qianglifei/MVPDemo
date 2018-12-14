@@ -6,9 +6,11 @@ import android.view.View;
 
 import com.moible.qlf.baseframework.base.BaseActivity;
 import com.moible.qlf.mvpdemo.R;
+import com.moible.qlf.mvpdemo.login.mvp.LoginContract;
+import com.moible.qlf.mvpdemo.login.mvp.LoginModule;
+import com.moible.qlf.mvpdemo.login.mvp.LoginPresenter;
 
-public class LoginActivity extends BaseActivity {
-
+public class LoginActivity extends BaseActivity<LoginPresenter,LoginModule> implements LoginContract.ILoginView {
 
     @Override
     protected void initEvent() {
@@ -42,6 +44,31 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void setLoginData(Object object) {
+
+    }
+
+    @Override
+    public void showLoading(String title) {
+
+    }
+
+    @Override
+    public void stopLoading() {
+
+    }
+
+    @Override
+    public void showMessage(String msg) {
+
+    }
+
+    @Override
+    public void fail(Object ob) {
 
     }
 }
