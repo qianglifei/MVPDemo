@@ -3,6 +3,7 @@ package com.moible.qlf.baseframework.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by boxu on 2017/4/1.
  */
 
-public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel> extends SupportFragment {
+public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment {
     private static final String TAG = "BaseFragment";
     public Toolbar mToolbar;
     public TextView title;
@@ -49,12 +50,6 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
             rootView = inflater.inflate(getLayoutResource(), container, false);
         mRxManager = new RxManager();
         bind = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
 
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
@@ -68,6 +63,8 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         initTitle();
         initPresenter();
         initView();
+
+        return rootView;
     }
 
     /**
