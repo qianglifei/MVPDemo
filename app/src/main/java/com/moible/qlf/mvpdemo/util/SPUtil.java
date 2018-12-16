@@ -5,12 +5,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.text.TextUtils;
 
-
-import com.moible.qlf.baseframework.base.BaseApplication;
+import com.moible.qlf.mvpdemo.application.BaseApplication;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
+
+
 
 /**
  * sp工具类
@@ -32,7 +33,7 @@ public class SPUtil {
         if (value==null) {
             return false;
         }
-        Context context = BaseApplication.getAppContext();
+        Context context = BaseApplication.getInstance();
         SharedPreferences preferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);//创建仅允许本应用使用的SharedPreferences
         Editor editor = preferences.edit();
         if (value instanceof String) {
@@ -71,7 +72,7 @@ public class SPUtil {
      * @return
      */
     public static <T> T getData(String spName, String key, Class<T> type, T defaultVal) {
-        Context context = BaseApplication.getAppContext();
+        Context context = BaseApplication.getInstance();
         SharedPreferences preferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);//创建仅允许本应用使用的SharedPreferences
         if (String.class.equals(type)) {
             return (T) preferences.getString(key, defaultVal != null ? ((String) defaultVal) : null);
@@ -108,7 +109,7 @@ public class SPUtil {
      * @param spName sp参数名
      */
     public static void clearData(String spName) {
-        Context context = BaseApplication.getAppContext();
+        Context context = BaseApplication.getInstance();
         SharedPreferences preferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);//创建仅允许本应用使用的SharedPreferences
         preferences.edit().clear().commit();
     }

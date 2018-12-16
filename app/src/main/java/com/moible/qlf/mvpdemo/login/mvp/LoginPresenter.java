@@ -1,22 +1,31 @@
 package com.moible.qlf.mvpdemo.login.mvp;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.moible.qlf.baseframework.baserx.RxSubscriber;
 import com.moible.qlf.baseframework.com.OnLoadDataIm;
 import com.moible.qlf.baseframework.utils.ToastUtils;
-import com.moible.qlf.mvpdemo.http.BaseResponse;
-import com.moible.qlf.mvpdemo.http.HttpResultFunc;
-import com.moible.qlf.mvpdemo.http.ReturnDataBean;
+
+
+import java.io.IOException;
+
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class LoginPresenter extends LoginContract.ILoginPresenter{
 
     @Override
-    public void postSendLoginData(Context context, String userName, String password, OnLoadDataIm callback) {
-        mModel.postSendLoginData(context,userName,password,callback).subscribe(new RxSubscriber<HttpResultFunc<ReturnDataBean>>(mContext,false) {
+    public void postSendLoginData(Context context, RequestBody requestBody, OnLoadDataIm callback) {
+        mModel.postSendLoginData(context,requestBody,callback).subscribe(new RxSubscriber<ResponseBody>(mContext,false) {
             @Override
-            protected void _onNext(HttpResultFunc<ReturnDataBean> resultFunc) {
-                mView.setLoginData(resultFunc);
+            protected void _onNext(ResponseBody resultFunc) {
+                try {
+                    Log.i("TAG", "===onNext: " + resultFunc.string());
+                    mView.setLoginData(resultFunc);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

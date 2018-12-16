@@ -11,7 +11,7 @@
         app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="parent"
-        android:text="Login"
+        android:text="登陆"
         android:gravity="center"
         android:textColor="@color/red"
         android:textSize="25sp"

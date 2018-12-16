@@ -1,20 +1,18 @@
 package com.moible.qlf.mvpdemo.bottomfragment1;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.moible.qlf.baseframework.base.BaseFragment;
 import com.moible.qlf.mvpdemo.R;
+import com.moible.qlf.mvpdemo.login.ui.LoginActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class BottomFragment1 extends BaseFragment {
+public class BottomFragment1 extends BaseFragment{
 
     Unbinder unbinder;
     @BindView(R.id.button_login)
@@ -41,18 +39,12 @@ public class BottomFragment1 extends BaseFragment {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(),LoginActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
     @Override
     public void onDestroyView() {

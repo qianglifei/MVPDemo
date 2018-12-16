@@ -18,7 +18,6 @@ import com.moible.qlf.baseframework.utils.TUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by boxu on 2017/4/1.
@@ -56,7 +55,7 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         if (mPresenter != null) {
             mPresenter.mContext = this.getActivity();
         }
-        mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        mToolbar = rootView.findViewById(R.id.toolbar);
         if (null != mToolbar) {
             initTitle();
         }

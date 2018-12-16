@@ -6,10 +6,10 @@ import com.moible.qlf.baseframework.base.BaseModel;
 import com.moible.qlf.baseframework.base.BasePresenter;
 import com.moible.qlf.baseframework.base.BaseView;
 import com.moible.qlf.baseframework.com.OnLoadDataIm;
-import com.moible.qlf.mvpdemo.http.HttpResultFunc;
-import com.moible.qlf.mvpdemo.http.ReturnDataBean;
 
 import io.reactivex.Flowable;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public interface LoginContract {
     /**
@@ -23,13 +23,13 @@ public interface LoginContract {
      * M 视图
      */
     interface ILoginModel extends BaseModel {
-        Flowable<HttpResultFunc<ReturnDataBean>> postSendLoginData(Context context, String userName, String password, OnLoadDataIm onLoadDataIm);
+        Flowable<ResponseBody> postSendLoginData(Context context, RequestBody requestBody, OnLoadDataIm onLoadDataIm);
     }
 
     /**
      * P视图
      */
     abstract  class  ILoginPresenter extends BasePresenter<ILoginView,ILoginModel> {
-        public abstract void postSendLoginData(Context context, String userName, String password, OnLoadDataIm onLoadDataIm);
+        public abstract void postSendLoginData(Context context, RequestBody requestBody, OnLoadDataIm onLoadDataIm);
     }
 }

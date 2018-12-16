@@ -1,27 +1,21 @@
 package com.moible.qlf.mvpdemo.http;
 
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-
-import com.moible.qlf.baseframework.base.BaseApplication;
 import com.moible.qlf.mvpdemo.BuildConfig;
 import com.moible.qlf.mvpdemo.api.RetrofitApiService;
+import com.moible.qlf.mvpdemo.application.BaseApplication;
 import com.moible.qlf.mvpdemo.config.Constant;
 import com.moible.qlf.mvpdemo.config.URLConfig;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.Subscriber;
-
-import rx.schedulers.Schedulers;
 
 /**
  * Created by qlf on 2017/9/1.
@@ -59,15 +53,15 @@ public class RetrofitManager {
         File cacheFile = new File(Constant.PATH_CACHE);
         okhttp3.Cache cache = new okhttp3.Cache(cacheFile, 1024 * 1024 * 50);
         //设置网络请求拦截器
-        NetCheckInterceptor netCheckInterceptor = new NetCheckInterceptor(BaseApplication.getAppContext());
+        NetCheckInterceptor netCheckInterceptor = new NetCheckInterceptor(BaseApplication.mContext);
         builder.addNetworkInterceptor(netCheckInterceptor);
         /**
          * 设置网络请求响应拦截器
          */
         //添加首次请求拦截器，获取登陆以后的sessionId，存到sharePreferences中
-        builder.addInterceptor(new ReceivedCookiesInterceptor());
+        //builder.addInterceptor(new ReceivedCookiesInterceptor());
         //获取本地的cookie，携带到非首次的请求中。
-        builder.addInterceptor(new AddCookiesInterceptor());
+        //builder.addInterceptor(new AddCookiesInterceptor());
         //主机验证，SSL证书
         // .hostnameVerifier(new SafeHostnameVerifier())
         // .sslSocketFactory(CcsApplication.getSslSocket(),new SafeTrustManager())
@@ -85,15 +79,15 @@ public class RetrofitManager {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(URLConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClient)
                 .build();
     }
 
-//    public <T> T createReq(Class<T> reqServer){
-//        return mRetrofit.create(reqServer);
-//    }
-//
+    public <T> T createReq(Class<T> reqServer){
+        return mRetrofit.create(reqServer);
+    }
+
 //    public <T> void toSubscribe(Observable<T> o, Subscriber<T> s) {
 //        o.subscribeOn(Schedulers.io()) //在IO线程 产生数据
 //                .unsubscribeOn(Schedulers.io())

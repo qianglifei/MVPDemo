@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
         //配置tab与之对应的fragment
         mBotNavBar.addItem(new BottomNavigationItem(R.mipmap.bottom_sy, "网络框架"))
-                .addItem(new BottomNavigationItem(R.mipmap.bottom_jl, "简历"))
+                .addItem(new BottomNavigationItem(R.mipmap.bottom_jl, "自定义View"))
                 .addItem(new BottomNavigationItem(R.mipmap.bottom_zw, "职位"))
                 .addItem(new BottomNavigationItem(R.mipmap.bottom_zx, "资讯"));
         mBotNavBar.setActiveColor("#4baaeb")
