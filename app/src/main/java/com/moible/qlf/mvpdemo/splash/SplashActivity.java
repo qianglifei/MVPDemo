@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 /**
  * @author qlf
  */
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity{
 
     @BindView(R.id.imageView)
     ConstraintLayout imageView;

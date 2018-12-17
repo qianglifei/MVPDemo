@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="用户名"
+        android:text="15210603710"
         />
     <EditText
         android:layout_marginTop="5dp"
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="密码"
+        android:text="a00000"
         app:layout_constraintTop_toBottomOf="@+id/editText_userName"
         />
 

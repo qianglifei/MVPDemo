@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -93,8 +94,17 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
 //            tintManager.setStatusBarTintResource(R.color.toolsbarColor);//通知栏所需颜色
 //        }
         bind = ButterKnife.bind(this);
-        mPresenter = TUtil.getT(this, 0);
-        mModel = TUtil.getT(this, 1);
+
+        if (TUtil.getT(this,0) != null){
+            mPresenter = TUtil.getT(this, 0);
+            Log.i(TAG, "===onCreate: " + TUtil.getT(this,0).getClass());
+        }
+
+        if (TUtil.getT(this,1) != null){
+            mModel = TUtil.getT(this, 1);
+            Log.i(TAG, "===onCreate: " + TUtil.getT(this,0).getClass());
+        }
+
         if (mPresenter != null) {
             mPresenter.mContext = this;
         }

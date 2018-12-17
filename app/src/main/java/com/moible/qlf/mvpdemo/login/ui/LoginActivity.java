@@ -2,6 +2,7 @@ package com.moible.qlf.mvpdemo.login.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,9 +12,11 @@ import com.moible.qlf.mvpdemo.R;
 import com.moible.qlf.mvpdemo.login.mvp.LoginContract;
 import com.moible.qlf.mvpdemo.login.mvp.LoginModule;
 import com.moible.qlf.mvpdemo.login.mvp.LoginPresenter;
+import com.moible.qlf.mvpdemo.util.ToastUtils;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -21,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> implements LoginContract.ILoginView {
     @BindView(R.id.editText_userName)
@@ -76,16 +80,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> imp
 
     private void login() {
         HashMap<String,String> hashMap = new HashMap<>();
-        hashMap.put("yhzh","15210603710");
-        hashMap.put("yhmm","a00000");
+        hashMap.put("yhzh",editTextUserName.getText().toString().trim());
+        hashMap.put("yhmm",editTextPassword.getText().toString().trim());
         String obj = new JSONObject(hashMap).toString();
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),obj);
         mPresenter.postSendLoginData(mContext, body, null);
     }
 
     @Override
-    public void setLoginData(Object object) {
-
+    public void setLoginData(Object object) throws IOException {
+        ResponseBody responseBody = (ResponseBody) object;
+        ToastUtils.showToast(mContext,responseBody.string());
     }
 
     @Override

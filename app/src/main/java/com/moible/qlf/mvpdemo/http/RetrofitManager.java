@@ -53,15 +53,15 @@ public class RetrofitManager {
         File cacheFile = new File(Constant.PATH_CACHE);
         okhttp3.Cache cache = new okhttp3.Cache(cacheFile, 1024 * 1024 * 50);
         //设置网络请求拦截器
-        NetCheckInterceptor netCheckInterceptor = new NetCheckInterceptor(BaseApplication.mContext);
+        NetCheckInterceptor netCheckInterceptor = new NetCheckInterceptor(BaseApplication.getInstance());
         builder.addNetworkInterceptor(netCheckInterceptor);
         /**
          * 设置网络请求响应拦截器
          */
         //添加首次请求拦截器，获取登陆以后的sessionId，存到sharePreferences中
-        //builder.addInterceptor(new ReceivedCookiesInterceptor());
+        builder.addInterceptor(new ReceivedCookiesInterceptor());
         //获取本地的cookie，携带到非首次的请求中。
-        //builder.addInterceptor(new AddCookiesInterceptor());
+        builder.addInterceptor(new AddCookiesInterceptor());
         //主机验证，SSL证书
         // .hostnameVerifier(new SafeHostnameVerifier())
         // .sslSocketFactory(CcsApplication.getSslSocket(),new SafeTrustManager())

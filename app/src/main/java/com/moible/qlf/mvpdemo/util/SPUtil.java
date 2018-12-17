@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.moible.qlf.mvpdemo.application.BaseApplication;
 
@@ -73,6 +74,10 @@ public class SPUtil {
      */
     public static <T> T getData(String spName, String key, Class<T> type, T defaultVal) {
         Context context = BaseApplication.getInstance();
+        if (context == null){
+            Log.i("TAG", "===getDataContext: " + "null");
+        }
+
         SharedPreferences preferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);//创建仅允许本应用使用的SharedPreferences
         if (String.class.equals(type)) {
             return (T) preferences.getString(key, defaultVal != null ? ((String) defaultVal) : null);

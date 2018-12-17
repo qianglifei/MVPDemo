@@ -49,9 +49,12 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
             rootView = inflater.inflate(getLayoutResource(), container, false);
         mRxManager = new RxManager();
         bind = ButterKnife.bind(this, rootView);
-
-        mPresenter = TUtil.getT(this, 0);
-        mModel = TUtil.getT(this, 1);
+        if (TUtil.getT(this, 0) != null){
+            mPresenter = TUtil.getT(this, 0);
+        }
+        if (TUtil.getT(this, 1) != null){
+            mModel = TUtil.getT(this, 0);
+        }
         if (mPresenter != null) {
             mPresenter.mContext = this.getActivity();
         }
@@ -62,7 +65,6 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         initTitle();
         initPresenter();
         initView();
-
         return rootView;
     }
 

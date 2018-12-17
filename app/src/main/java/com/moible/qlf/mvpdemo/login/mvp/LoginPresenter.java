@@ -21,7 +21,6 @@ public class LoginPresenter extends LoginContract.ILoginPresenter{
             @Override
             protected void _onNext(ResponseBody resultFunc) {
                 try {
-                    Log.i("TAG", "===onNext: " + resultFunc.string());
                     mView.setLoginData(resultFunc);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -31,7 +30,7 @@ public class LoginPresenter extends LoginContract.ILoginPresenter{
             @Override
             protected void _onError(String message) {
                 mView.stopLoading();
-                ToastUtils.toastShort(mContext, "加载失败");
+                ToastUtils.toastShort(mContext, message);
             }
         });
     }

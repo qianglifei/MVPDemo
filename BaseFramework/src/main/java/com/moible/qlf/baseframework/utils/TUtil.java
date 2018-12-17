@@ -2,6 +2,8 @@ package com.moible.qlf.baseframework.utils;
 
 import android.util.Log;
 
+import com.moible.qlf.baseframework.base.BaseActivity;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -15,15 +17,17 @@ public class TUtil{
     public static <T> T getT(Object o, int i) {
         try {
             /**
-             * 得到实际的泛型类
+             * 获取超类（父类）的泛型参数的实际类型
              */
-            ParameterizedType parameterizedType =  (ParameterizedType) o.getClass().getGenericSuperclass();
-            Log.i("TAG", "===getT: "  + parameterizedType.toString());
-            Type[] types = parameterizedType.getActualTypeArguments();
-            Class<T> beanClass = (Class<T>) types[i];
 
-            return beanClass.newInstance();
 
+//            ParameterizedType parameterizedType = (ParameterizedType) o.getClass().getGenericSuperclass();
+//
+//            Type[] types = parameterizedType.getActualTypeArguments();
+//            Class<T> beanClass = (Class<T>) types[i];
+            Class<T> beanClass = GenericsUtils.getSuperClassGenricType(o.getClass(),i);
+
+            return beanClass == null ? null:beanClass.newInstance();
 //            return ((Class<T>) ((ParameterizedType) (o.getClass()
 //                    .getGenericSuperclass())).getActualTypeArguments()[i])
 //                    .newInstance();

@@ -7,6 +7,8 @@ import com.moible.qlf.baseframework.base.BasePresenter;
 import com.moible.qlf.baseframework.base.BaseView;
 import com.moible.qlf.baseframework.com.OnLoadDataIm;
 
+import java.io.IOException;
+
 import io.reactivex.Flowable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -16,7 +18,7 @@ public interface LoginContract {
      * V视图
      */
     interface  ILoginView extends BaseView {
-        void setLoginData(Object object);
+        void setLoginData(Object object) throws IOException;
     }
 
     /**
