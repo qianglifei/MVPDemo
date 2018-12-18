@@ -12,6 +12,7 @@ import com.moible.qlf.mvpdemo.R;
 import com.moible.qlf.mvpdemo.login.mvp.LoginContract;
 import com.moible.qlf.mvpdemo.login.mvp.LoginModule;
 import com.moible.qlf.mvpdemo.login.mvp.LoginPresenter;
+import com.moible.qlf.mvpdemo.util.StatusBarUtil;
 import com.moible.qlf.mvpdemo.util.ToastUtils;
 
 import org.json.JSONObject;
@@ -61,6 +62,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> imp
         mContext = this;
         unbinder = ButterKnife.bind(this);
         buttonLogins.setOnClickListener(this);
+
+        StatusBarUtil.fullScreen(this);
     }
 
     @Override
