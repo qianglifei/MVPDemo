@@ -31,10 +31,16 @@ public class SplashActivity extends BaseActivity{
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.CAMERA //相机
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+    }
+
+    @Override
+    protected void modifyStatusBarColor() {
+
     }
 
     @Override

@@ -1,12 +1,17 @@
 package com.moible.qlf.mvpdemo.main;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +27,7 @@ import com.moible.qlf.mvpdemo.bottomfragment1.BottomFragment1;
 import com.moible.qlf.mvpdemo.bottomfragment2.BottomFragment2;
 import com.moible.qlf.mvpdemo.bottomfragment3.BottomFragment3;
 import com.moible.qlf.mvpdemo.bottomfragment4.BottomFragment4;
+import com.moible.qlf.mvpdemo.util.StatusBarUtil;
 
 import java.lang.reflect.Field;
 
@@ -49,6 +55,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private BottomFragment3 bottomFragment3;
     private BottomFragment4 bottomFragment4;
     private FragmentManager fm = null;
+
+    @Override
+    protected void modifyStatusBarColor() {
+        StatusBarUtil.setWindowStatusBarColor(this,Color.GREEN);
+    }
+
     @Override
     protected void initEvent() {
         mBotNavBar.setMode(BottomNavigationBar.MODE_FIXED);

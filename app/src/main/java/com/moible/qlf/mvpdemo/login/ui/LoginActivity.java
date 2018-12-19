@@ -1,8 +1,8 @@
 package com.moible.qlf.mvpdemo.login.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +38,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> imp
     private Unbinder unbinder = null;
 
     @Override
+    protected void modifyStatusBarColor() {
+        StatusBarUtil.setWindowStatusBarColor(this,Color.BLUE);
+    }
+
+    @Override
     protected void initEvent() {
 
     }
@@ -62,8 +67,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> imp
         mContext = this;
         unbinder = ButterKnife.bind(this);
         buttonLogins.setOnClickListener(this);
-
-        StatusBarUtil.fullScreen(this);
     }
 
     @Override

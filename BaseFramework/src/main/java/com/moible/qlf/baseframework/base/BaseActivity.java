@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +31,7 @@ import com.moible.qlf.baseframework.utils.ASimpleCacheUtils;
 import com.moible.qlf.baseframework.utils.ExitUtil;
 import com.moible.qlf.baseframework.utils.SharedPreferencesUtil;
 import com.moible.qlf.baseframework.utils.StringUtil;
+import com.moible.qlf.baseframework.utils.SystemBarTintManager;
 import com.moible.qlf.baseframework.utils.TUtil;
 import com.moible.qlf.baseframework.utils.ToastUtils;
 import com.moible.qlf.baseframework.utils.daynightutils.ChangeModeController;
@@ -82,17 +84,20 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         // 把actvity放到application栈中管理
         AppManager.getAppManager().addActivity(this);
 
+        //修改状态栏的颜色
+        modifyStatusBarColor();
         setContentView(getLayoutId());
 
-        //userid
-        Constants.user_id = SharedPreferencesUtil.getPrefString(mContext,
-                "userId", "");
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            setTranslucentStatus(true);
-//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//            tintManager.setStatusBarTintEnabled(true);
-//            tintManager.setStatusBarTintResource(R.color.toolsbarColor);//通知栏所需颜色
-//        }
+        Window window = this.getWindow();
+        //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        //设置状态栏颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.blue));
+        }
+
         bind = ButterKnife.bind(this);
 
         if (TUtil.getT(this,0) != null){
@@ -117,6 +122,8 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         }
         initEvent();
     }
+
+    protected abstract void modifyStatusBarColor();
 
     protected abstract void initEvent();
 
