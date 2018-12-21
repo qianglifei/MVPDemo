@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -32,6 +32,14 @@ android {
     }
 }
 
+greendao {
+    schemaVersion 1//数据库版本号
+    daoPackage 'com.com.sky.downloader.greendao'//设置DaoMaster、DaoSession、Dao包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    generateTests false //true的时候自动生成测试单元
+    targetGenDirTests 'src/androidTest/java' //测试单元的生成目录默认是
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -45,4 +53,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation project(':Granor')
     implementation project(':TitleBar')
+    implementation 'org.greenrobot:greendao:3.2.2'
 }

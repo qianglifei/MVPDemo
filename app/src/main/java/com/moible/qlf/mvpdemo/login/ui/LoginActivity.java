@@ -3,18 +3,24 @@ package com.moible.qlf.mvpdemo.login.ui;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.com.sky.downloader.greendao.DaoSession;
+import com.com.sky.downloader.greendao.UserDao;
 import com.moible.qlf.baseframework.base.BaseActivity;
 import com.moible.qlf.mvpdemo.R;
+import com.moible.qlf.mvpdemo.application.BaseApplication;
+import com.moible.qlf.mvpdemo.greendao.User;
 import com.moible.qlf.mvpdemo.login.mvp.LoginContract;
 import com.moible.qlf.mvpdemo.login.mvp.LoginModule;
 import com.moible.qlf.mvpdemo.login.mvp.LoginPresenter;
 import com.moible.qlf.mvpdemo.util.StatusBarUtil;
 import com.moible.qlf.mvpdemo.util.ToastUtils;
 
+import org.greenrobot.greendao.rx.RxQuery;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -36,7 +42,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> imp
     Button buttonLogins;
     private Context mContext = null;
     private Unbinder unbinder = null;
-
+    private static DaoSession mDaoSession;
+    private UserDao mUserDao;
     @Override
     protected void modifyStatusBarColor() {
         StatusBarUtil.setWindowStatusBarColor(this,Color.BLUE);
@@ -44,7 +51,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> imp
 
     @Override
     protected void initEvent() {
-
+        User user = new User(null,"qianglifei",24);
+        try {
+            mUserDao.insert(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.i(TAG, "===initEvent: " + "插入失败。。。");
+        }
+        ToastUtils.showToast(mContext,"插入成功");
     }
 
     @Override
@@ -67,6 +81,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginModule> imp
         mContext = this;
         unbinder = ButterKnife.bind(this);
         buttonLogins.setOnClickListener(this);
+        mDaoSession = BaseApplication.getDaoSession();
+        mUserDao = mDaoSession.getUserDao();
     }
 
     @Override
