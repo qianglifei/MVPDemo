@@ -23,7 +23,7 @@ import butterknife.Unbinder;
  * Created by boxu on 2017/4/1.
  */
 
-public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment{
     private static final String TAG = "BaseFragment";
     public Toolbar mToolbar;
     public TextView title;
@@ -35,6 +35,8 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
     public E mModel;
     public RxManager mRxManager;
     private Unbinder bind;
+
+
 
     public BaseFragment() { /* compiled code */ }
 

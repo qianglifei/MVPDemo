@@ -16,7 +16,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/NOTICE'
@@ -30,6 +29,7 @@ android {
         exclude 'META-INF/rxjava'
         exclude 'META-INF/RXJAVA'
     }
+    buildToolsVersion '28.0.3'
 }
 
 greendao {

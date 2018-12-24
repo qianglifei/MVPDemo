@@ -17,7 +17,7 @@ public class LoginPresenter extends LoginContract.ILoginPresenter{
 
     @Override
     public void postSendLoginData(Context context, RequestBody requestBody, OnLoadDataIm callback) {
-        mModel.postSendLoginData(context,requestBody,callback).subscribe(new RxSubscriber<ResponseBody>(mContext,false) {
+        mModel.postSendLoginData(context,requestBody,callback).subscribe(new RxSubscriber<ResponseBody>(mContext,true) {
             @Override
             protected void _onNext(ResponseBody resultFunc) {
                 try {
