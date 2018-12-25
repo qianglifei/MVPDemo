@@ -61,7 +61,7 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
         super.onStart();
         if (showDialog) {
             try {
-                LoadingDialog.showLoadingDialog((Activity) mContext,0,msg);
+                LoadingDialog.showLoadingDialog(mContext,0,msg);
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import com.moible.qlf.baseframework.base.BaseFragment;
 import com.moible.qlf.mvpdemo.R;
 import com.moible.qlf.mvpdemo.login.customview.LoadingFrame;
+import com.moible.qlf.mvpdemo.login.customview.StateLayout;
 import com.moible.qlf.mvpdemo.login.ui.LoginActivity;
 
 import butterknife.BindView;
@@ -19,12 +20,11 @@ import butterknife.Unbinder;
 
 public class BottomFragment1 extends BaseFragment {
     Unbinder unbinder;
-    @BindView(R.id.button_login)
-    Button buttonLogin;
+//    @BindView(R.id.button_login)
+//    Button buttonLogin;
+
     Unbinder unbinder1;
-    @BindView(R.id.frameLayout)
-    FrameLayout frameLayout;
-    Unbinder unbinder2;
+
     private LoadingFrame loadingFrame;
 
     @Override
@@ -34,6 +34,17 @@ public class BottomFragment1 extends BaseFragment {
 
     @Override
     protected int getLayoutResource() {
+        StateLayout stateLayout = new StateLayout(getContext());
+
+        stateLayout.showEmptyView();
+
+        stateLayout.setOnReloadListener(new StateLayout.OnReloadListener() {
+            @Override
+            public void onReload() {
+
+            }
+        });
+
         return R.layout.fragment_bottom1;
     }
 
@@ -44,27 +55,13 @@ public class BottomFragment1 extends BaseFragment {
 
     @Override
     protected void initView() {
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-//        loadingFrame = new LoadingFrame(getContext()) {
+//        buttonLogin.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public View onSuccessView() {
-//                return ;
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), LoginActivity.class);
+//                startActivity(intent);
 //            }
-//
-//            @Override
-//            public int onLoad() {
-//                return 200;
-//            }
-//        };
-
-        loadingFrame.show();
+//        });
     }
 
     @Override

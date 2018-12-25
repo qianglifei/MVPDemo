@@ -37,7 +37,9 @@
         <activity
             android:name=".login.ui.LoginActivity"
             android:maxAspectRatio="2.4" />
-        <activity android:name=".login2.Login2Activity"></activity>
+        <activity android:name=".login2.Login2Activity">
+
+        </activity>
     </application>
 
 </manifest>

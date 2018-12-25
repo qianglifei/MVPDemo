@@ -54,4 +54,5 @@ dependencies {
     implementation project(':Granor')
     implementation project(':TitleBar')
     implementation 'org.greenrobot:greendao:3.2.2'
+
 }

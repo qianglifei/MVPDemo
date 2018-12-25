@@ -12,7 +12,7 @@ import io.reactivex.functions.Consumer;
 public class RxManager {
     public RxBus mRxBus = RxBus.getInstance();
     //管理rxbus订阅
-   // private Map<Class<?>, Flowable<?>> mFlowable = new HashMap<>();
+    //private Map<Class<?>, Flowable<?>> mFlowable = new HashMap<>();
     /*管理Observables 和 Subscribers订阅*/
     private CompositeDisposable  mCompositeDisposable = new CompositeDisposable();
 
