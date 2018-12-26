@@ -27,18 +27,18 @@
             android:name=".splash.SplashActivity"
             android:maxAspectRatio="2.4"
             android:resizeableActivity="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".main.MainActivity" />
         <activity
             android:name=".login.ui.LoginActivity"
             android:maxAspectRatio="2.4" />
         <activity android:name=".login2.Login2Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

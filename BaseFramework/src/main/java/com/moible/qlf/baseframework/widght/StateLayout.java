@@ -1,4 +1,4 @@
-package com.moible.qlf.mvpdemo.login.customview;
+package com.moible.qlf.baseframework.widght;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.moible.qlf.mvpdemo.R;
+import com.moible.qlf.baseframework.R;
 
 
 public class StateLayout extends FrameLayout {

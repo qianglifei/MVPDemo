@@ -1,5 +1,6 @@
 package com.moible.qlf.baseframework.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.moible.qlf.baseframework.R;
 import com.moible.qlf.baseframework.baserx.RxManager;
 import com.moible.qlf.baseframework.dialog.LoadingDialog;
 import com.moible.qlf.baseframework.utils.TUtil;
+import com.moible.qlf.baseframework.view.StateLayout;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -24,31 +26,41 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment{
+
     private static final String TAG = "BaseFragment";
     public Toolbar mToolbar;
     public TextView title;
     public ImageView back;
     public TextView tv_menu;
     public ImageView iv_menu;
-    protected View rootView;
+    protected StateLayout rootView;
     public T mPresenter;
     public E mModel;
     public RxManager mRxManager;
     private Unbinder bind;
-
+    private Context mContext;
 
 
     public BaseFragment() { /* compiled code */ }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = getContext();
+    }
+
+    @Override
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        rootView = new StateLayout(mContext);
         if (null != getArguments()) {
             getBundleExtras(getArguments());
         }
-        if (rootView == null)
-            rootView = inflater.inflate(getLayoutResource(), container, false);
+        if (rootView == null){
+           // rootView = inflater.inflate(getLayoutResource(), container, false);
+            rootView.setContentView(getLayoutResource());
+        }
         mRxManager = new RxManager();
         bind = ButterKnife.bind(this, rootView);
         if (TUtil.getT(this, 0) != null){
