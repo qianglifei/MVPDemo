@@ -1,17 +1,13 @@
 package com.moible.qlf.mvpdemo.main;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,8 +16,6 @@ import android.widget.TextView;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.moible.qlf.baseframework.base.BaseActivity;
-import com.moible.qlf.baseframework.base.BaseModel;
-import com.moible.qlf.baseframework.base.BasePresenter;
 import com.moible.qlf.mvpdemo.R;
 import com.moible.qlf.mvpdemo.bottomfragment1.BottomFragment1;
 import com.moible.qlf.mvpdemo.bottomfragment2.BottomFragment2;
@@ -104,6 +98,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public void initView() {
         ButterKnife.bind(this);
         fm = getSupportFragmentManager();
+
     }
 
     @Override

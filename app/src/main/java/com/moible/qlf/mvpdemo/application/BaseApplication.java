@@ -10,11 +10,6 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.com.sky.downloader.greendao.DaoMaster;
-import com.com.sky.downloader.greendao.DaoSession;
-
-import org.greenrobot.greendao.database.Database;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +26,7 @@ public class BaseApplication extends Application {
     private Set<Activity> allActivities;
     public final static String  APP_PACKET_NAME = "com.moible.bksx.xcb.retrofitmvpdemo";
 
-    private static DaoSession mDaoSession;
+   // private static DaoSession mDaoSession;
 
     public BaseApplication(){
 
@@ -59,7 +54,7 @@ public class BaseApplication extends Application {
         getScreenSize();
         //CrashHandler.getInstance().init(this);
 
-        setUpDataBase(mContext);
+       // setUpDataBase(mContext);
     }
 
     private void getScreenSize() {
@@ -141,15 +136,15 @@ public class BaseApplication extends Application {
      * 第三方框架的集成。。。。
      */
 
-    public void setUpDataBase(Context mContext){
-        DaoMaster.DevOpenHelper openHelper = new DaoMaster.DevOpenHelper(mContext,DATA_BASE_NAME,null);
-        Database db = openHelper.getWritableDb();
-        DaoMaster daoMaster = new DaoMaster(db);
-
-        mDaoSession = daoMaster.newSession();
-    }
-
-    public static DaoSession getDaoSession(){
-        return mDaoSession;
-    }
+//    public void setUpDataBase(Context mContext){
+//        DaoMaster.DevOpenHelper openHelper = new DaoMaster.DevOpenHelper(mContext,DATA_BASE_NAME,null);
+//        Database db = openHelper.getWritableDb();
+//        DaoMaster daoMaster = new DaoMaster(db);
+//
+//        mDaoSession = daoMaster.newSession();
+//    }
+//
+//    public static DaoSession getDaoSession(){
+//        return mDaoSession;
+//    }
 }

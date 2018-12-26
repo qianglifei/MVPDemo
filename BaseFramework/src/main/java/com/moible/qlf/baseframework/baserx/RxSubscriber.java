@@ -1,6 +1,5 @@
 package com.moible.qlf.baseframework.baserx;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.moible.qlf.baseframework.R;
@@ -11,6 +10,7 @@ import io.reactivex.subscribers.DisposableSubscriber;
 
 
 /********************使用例子********************/
+
 /*_apiService.login(mobile, verifyCode)
         .//省略
         .subscribe(new RxSubscriber<User user>(mContext,false) {
@@ -18,11 +18,11 @@ import io.reactivex.subscribers.DisposableSubscriber;
 public void _onNext(User user) {
         // 处理user
         }
-
 @Override
 public void _onError(String msg) {
         ToastUtil.showShort(mActivity, msg);
         });*/
+
 public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
 
     private Context mContext;
@@ -44,9 +44,11 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
         this.msg = msg;
         this.showDialog=showDialog;
     }
+
     public RxSubscriber(Context context) {
         this(context, context.getString(R.string.loading),true);
     }
+
     public RxSubscriber(Context context, boolean showDialog) {
         this(context, context.getString(R.string.loading),showDialog);
     }
@@ -56,6 +58,7 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
         if (showDialog)
             LoadingDialog.cancelLoadingDialog();
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -67,7 +70,6 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
             }
         }
     }
-
 
     @Override
     public void onNext(T t) {

@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.moible.qlf.mvpdemo.R;
+
+import static android.support.constraint.Constraints.TAG;
 
 public abstract class LoadingFrame extends FrameLayout {
     //加载中
@@ -89,12 +92,17 @@ public abstract class LoadingFrame extends FrameLayout {
                             currentState = NETERROR;
                         } });
                 }
+
                 refreshView();
-            } }).start();
+        } }).start();
     }
 
     private void refreshView() {
         mlinearLayoutLoading.setVisibility(currentState == LOADING ? View.VISIBLE : View.GONE);
+        if (currentState == LOADING){
+            Log.i(TAG, "refreshView: " + "skldfjlsd");
+        }
+
         mlinearLayoutNoData.setVisibility(currentState == NODATA ? View.VISIBLE : View.GONE);
         mlinearLayoutNetError.setVisibility(currentState == NETERROR ? View.VISIBLE : View.GONE);
         mlinearLayoutLoadError.setVisibility(currentState == LOADERROR ? View.VISIBLE : View.GONE);
@@ -120,6 +128,7 @@ public abstract class LoadingFrame extends FrameLayout {
         addView(mlinearLayoutLoadError, params);
         refreshView();
     }
+
     private void createNetErrorView() {
         mlinearLayoutNetError = new LinearLayout(mContext);
         LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
