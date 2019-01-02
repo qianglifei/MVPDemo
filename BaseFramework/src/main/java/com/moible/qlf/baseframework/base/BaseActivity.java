@@ -429,7 +429,6 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     }
 
     public void setCentertwoBg(int resId) {
-
         mCenterTitle.setVisibility(View.GONE);
         if (resId == 0) {
             mCentertwo.setVisibility(View.GONE);

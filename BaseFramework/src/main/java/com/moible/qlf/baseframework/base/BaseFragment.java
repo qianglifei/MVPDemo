@@ -57,10 +57,11 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
         if (null != getArguments()) {
             getBundleExtras(getArguments());
         }
-        if (rootView == null){
-           // rootView = inflater.inflate(getLayoutResource(), container, false);
-            rootView.setContentView(getLayoutResource());
-        }
+
+       // rootView = inflater.inflate(getLayoutResource(), container, false);
+
+        rootView.setContentView(getLayoutResource());
+
         mRxManager = new RxManager();
         bind = ButterKnife.bind(this, rootView);
         if (TUtil.getT(this, 0) != null){

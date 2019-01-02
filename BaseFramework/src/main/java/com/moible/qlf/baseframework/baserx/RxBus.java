@@ -7,7 +7,7 @@ import io.reactivex.Flowable;
 import io.reactivex.processors.FlowableProcessor;
 import io.reactivex.processors.PublishProcessor;
 
-
+//有背压的RxBus
 public class RxBus {
 
     private final FlowableProcessor<Object> mBus;
@@ -29,7 +29,6 @@ public class RxBus {
     }
 
     public <T> Flowable<T> register(Class<T> clz) {
-
         return mBus.ofType(clz);
     }
 

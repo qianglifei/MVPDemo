@@ -16,8 +16,11 @@ public class RxSchedulers {
 
             @Override
             public Publisher<T> apply(Flowable<T> upstream) {
-                return upstream.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                return  upstream.
+                        //被观察者切换到子线程
+                        subscribeOn(Schedulers.io()).
+                        //观察者切换到主线程
+                        observeOn(AndroidSchedulers.mainThread());
             }
         };
     }

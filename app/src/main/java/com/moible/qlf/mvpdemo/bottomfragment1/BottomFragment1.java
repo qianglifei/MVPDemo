@@ -40,6 +40,8 @@ public class BottomFragment1 extends BaseFragment {
 //        });
 
         rootView.showFailView();
+
+        rootView.
     }
 
     @Override

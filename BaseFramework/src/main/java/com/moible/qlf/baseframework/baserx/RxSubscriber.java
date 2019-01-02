@@ -55,8 +55,9 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
 
     @Override
     public void onComplete() {
-        if (showDialog)
+        if (showDialog){
             LoadingDialog.cancelLoadingDialog();
+        }
     }
 
     @Override
@@ -77,19 +78,18 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
     }
     @Override
     public void onError(Throwable e) {
-        if (showDialog)
+        if (showDialog){
             LoadingDialog.cancelLoadingDialog();
-        e.printStackTrace();
-        //网络
+        }
+
         if (!NetWorkUtils.isNetConnected(mContext)) {
+            //网络
             _onError(mContext.getString(R.string.no_net));
-        }
-        //服务器
-        else if (e instanceof ServerException) {
+        } else if (e instanceof ServerException) {
+            //服务器
             _onError(e.getMessage());
-        }
-        //其它
-        else {
+        } else {
+            //其它
             _onError(mContext.getString(R.string.net_error));
         }
     }

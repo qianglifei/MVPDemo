@@ -8,12 +8,14 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-
+//管理rxbus订阅
+//private Map<Class<?>, Flowable<?>> mFlowable = new HashMap<>();
 public class RxManager {
     public RxBus mRxBus = RxBus.getInstance();
-    //管理rxbus订阅
-    //private Map<Class<?>, Flowable<?>> mFlowable = new HashMap<>();
-    /*管理Observables 和 Subscribers订阅*/
+
+    /**
+     *管理Observables 和 Subscribers订阅
+     */
     private CompositeDisposable  mCompositeDisposable = new CompositeDisposable();
 
     /**
@@ -23,12 +25,14 @@ public class RxManager {
      */
     public <T>void on(Class<T> eventName, Consumer consumer) {
         Flowable<T> register = mRxBus.register(eventName);
-     //   mFlowable.put(eventName, register);
-        /*订阅管理*/
-
-        register.observeOn(AndroidSchedulers.mainThread()).subscribe(consumer, new Consumer<Throwable>() {
+        //mFlowable.put(eventName, register);
+        /**
+         * 订阅管理
+         */
+        register.observeOn(AndroidSchedulers.mainThread()).
+                subscribe(consumer, new Consumer<Throwable>() {
             @Override
-            public void accept(Throwable throwable) throws Exception {
+            public void accept(Throwable throwable){
                 throwable.printStackTrace();
             }
         });
@@ -42,16 +46,21 @@ public class RxManager {
         /*订阅管理*/
         mCompositeDisposable.add(m);
     }
+
     /**
      * 单个presenter生命周期结束，取消订阅和所有rxbus观察
      */
     public void clear() {
         mRxBus.unregisterAll();
-
-        mCompositeDisposable.clear();// 取消所有订阅
+        // 取消所有订阅
+        mCompositeDisposable.clear();
 
     }
-    //发送rxbus
+
+
+    /**
+     * 发送rxbus
+     */
     public void post(@NonNull Object obj) {
         mRxBus.post(obj);
     }
